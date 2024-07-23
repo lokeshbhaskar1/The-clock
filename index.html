@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .clock {
+            text-align: center;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock" id="clock">
+        <p id="hours">Hours: </p>
+        <p id="minutes">Minutes: </p>
+    </div>
+
+    <script>
+        // Initial values
+        const initialHours = 108527;
+        const initialMinutes = 6511633;
+
+        // Creation time of the webpage (adjusted for 5 hours behind)
+        const creationTime = new Date('2024-07-23T19:00:00Z'); // Adjust the date and time as needed
+
+        function updateClock() {
+            const now = new Date();
+            const timeDifference = now - creationTime;
+
+            // Calculate the time difference in hours and minutes
+            const hoursDifference = Math.floor(timeDifference / (1000 * 60 * 60));
+            const minutesDifference = Math.floor(timeDifference / (1000 * 60));
+
+            // Calculate the updated values
+            const currentHours = initialHours + hoursDifference;
+            const currentMinutes = initialMinutes + minutesDifference;
+
+            // Display the updated values
+            document.getElementById('hours').textContent = 'Hours: ' + currentHours;
+            document.getElementById('minutes').textContent = 'Minutes: ' + currentMinutes;
+        }
+
+        // Update the clock on page load
+        updateClock();
+
+        // Update the minutes every minute
+        setInterval(updateClock, 60000);
+    </script>
+</body>
+</html>
